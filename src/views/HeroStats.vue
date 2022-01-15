@@ -6,7 +6,7 @@
       <span id="searchBar">
         <el-input v-model="search" size="small" placeholder="Search a Hero" />
       </span>
-          <!-- :fixed="x == 'Hero Name' ? true : false" -->
+      <!-- :fixed="x == 'Hero Name' ? true : false" -->
       <el-table :data="pagedHeros" stripe border height="100%" width="100%">
         <el-table-column
           v-for="x in tableHeader"
@@ -15,7 +15,16 @@
           :key="x"
           :prop="x"
           :label="x"
-        ></el-table-column>
+        >
+          <template v-if="x == 'Hero Image' ? true : false" #default="scope">
+            <span>
+            <img
+              calss="heroImage"
+              :src="imageLocator(scope.row['Hero Image'])"
+            />
+            </span>
+          </template>
+        </el-table-column>
       </el-table>
       <el-pagination
         background
@@ -67,7 +76,7 @@ export default {
               "Pro Ban Count": elem["pro_ban"],
             };
           });
-                  
+
           this.tableHeader = Object.keys(this.herosData[0]).filter((name) => {
             if (name !== "ID") return true;
           });
@@ -89,6 +98,10 @@ export default {
     setPage(val) {
       console.log("Set Page called", val);
       this.currentPage = val;
+    },
+    imageLocator(endpoint) {
+      console.log("image", "https://api.opendota.com" + endpoint);
+      return "https://api.opendota.com" + endpoint;
     },
   },
   computed: {
@@ -120,9 +133,9 @@ export default {
     },
   },
   created() {
-    // console.log("Created hook called",this.dataService);    
+    // console.log("Created hook called",this.dataService);
     this.getHerosData();
-},
+  },
   mounted() {
     console.log("Mounted hook called");
     console.log(this.herosData);
@@ -175,8 +188,12 @@ th {
   height: 451px;
 }
 
-.el-pagination{
-  margin-top:15px;
+.el-pagination {
+  margin-top: 15px;
 }
-
+img {
+  width: 120px;
+  height: 80px;
+  border-radius: 12px;
+}
 </style>
