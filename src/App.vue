@@ -10,13 +10,7 @@
         active-text-color="#ffd04b"
         @select="handleNavigation"
       >
-        <!-- <el-image
-        src="C:\Users\deepak52.singh\Desktop\Coding\Vuejs framework\dota-stats\src\assets\dota-2-96.png"
-        :fit="fit"
-      ></el-image> -->
-        <!-- <img :src="dota2imgUrl" /> -->
-        <!-- <el-menu-item index="Logo" > -->
-        <img alt="Dota-2 Logo" src="./assets/dota-2.png" />
+        <img alt="Dota-2 Logo" src="../public/favicon.png" />
         <span class="title">Dota Stats</span>
         <!-- </el-menu-item> -->
         <el-menu-item index="PlayerStats"> Player Stats </el-menu-item>
